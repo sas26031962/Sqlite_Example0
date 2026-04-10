@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    SqliteDriver = new cSqliteDriver();
+    SqliteDriver = new cSqliteDriver(ui->tableView);
 
     QPushButton * pbOpenDatabase = new QPushButton("Open");
     pbOpenDatabase->setCursor(Qt::PointingHandCursor);
@@ -88,7 +88,8 @@ bool MainWindow::execActionInsertRecord()
 
 bool MainWindow::execActionSelectAll()
 {
-    return SqliteDriver->selectAllAndShow();
+    //return SqliteDriver->selectAllAndShow();
+    return SqliteDriver->selectAllAndViewInTable();
 }
 
 bool MainWindow::execActionCloseDatabase()

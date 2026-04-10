@@ -5,8 +5,11 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
+#include <QSqlQueryModel>
+#include <QSqlRecord>
 #include <QString>
 #include <QDebug>
+#include <QTableView>
 #include <tuple>
 
 class cSqliteDriver : public QObject
@@ -18,6 +21,8 @@ class cSqliteDriver : public QObject
     QString qsMessage;
     QString qsDatabaseName = "audiobooks.db";
 
+    QTableView * TableView;
+
 public:
     QString qsTableName = "books";
 
@@ -25,7 +30,7 @@ public:
     //QSqlQuery query;
 
     //Конструкторы и деструкторы
-    explicit cSqliteDriver(QObject *parent = 0);
+    explicit cSqliteDriver(QTableView * table_view, QObject *parent = 0);
     ~cSqliteDriver();
 
     //Методы
@@ -35,6 +40,7 @@ public:
     bool createTable();
     bool insertRecord(std::tuple<QString, QString, QString> data);
     bool selectAllAndShow();
+    bool selectAllAndViewInTable();
     void showSelectionResult(QSqlQuery query);
 
 signals:
