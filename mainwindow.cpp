@@ -7,7 +7,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    SqliteDriver = new cSqliteDriver(ui->tableView);
+    SqliteDriver = new cSqliteDriver(
+                ui->tableView,
+                ui->textBrowserLog,
+                ui->groupBoxIncoming
+                );
 
     QPushButton * pbOpenDatabase = new QPushButton("Open");
     pbOpenDatabase->setCursor(Qt::PointingHandCursor);
@@ -57,7 +61,7 @@ MainWindow::MainWindow(QWidget *parent) :
     });
     ui->statusBar->addWidget(pbCloseDatabase);
 
-
+    if(!execActionOpenDatabase()) this->close();
 }
 
 MainWindow::~MainWindow()

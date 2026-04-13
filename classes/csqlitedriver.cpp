@@ -1,8 +1,15 @@
 #include "csqlitedriver.h"
 
-cSqliteDriver::cSqliteDriver(QTableView *table_view, QObject *parent) : QObject(parent)
+cSqliteDriver::cSqliteDriver(
+        QTableView *table_view,
+        QTextBrowser *text_browser_log,
+        QGroupBox * groub_box_incoming,
+        QObject *parent
+        ) : QObject(parent)
 {
     TableView = table_view;
+    tbLog = text_browser_log;
+    gbIncoming = groub_box_incoming;
 
     qDebug() << "Accessable drivers: " << QSqlDatabase::drivers();
     qDebug() << "cSqliteDriver ctor";
@@ -33,6 +40,7 @@ bool cSqliteDriver::openDatabase()
         qsMessage += db.lastError().text();
     }
     qDebug() << qsMessage;
+    tbLog->append(qsMessage);
 
     return x;
 }
@@ -43,6 +51,9 @@ bool cSqliteDriver::closeDatabase()
     qsMessage = qsName;
     qsMessage += " > Connection close.";
     qDebug() << qsMessage;
+    tbLog->append(qsMessage);
+
+    return true;
 }
 
 bool cSqliteDriver::dropTable()
@@ -68,6 +79,7 @@ bool cSqliteDriver::dropTable()
         qsMessage += query.lastError().text();
     }
     qDebug() << qsMessage;
+    tbLog->append(qsMessage);
 
     return x;
 }
@@ -105,6 +117,7 @@ bool cSqliteDriver::createTable()
     }
 
     qDebug() << qsMessage;
+    tbLog->append(qsMessage);
 
     return x;
 }
@@ -155,6 +168,7 @@ bool cSqliteDriver::insertRecord(std::tuple<QString, QString, QString> data)
     }
 
     qDebug() << qsMessage;
+    tbLog->append(qsMessage);
 
     return x;
 }
@@ -187,6 +201,7 @@ bool cSqliteDriver::selectAllAndShow()
     }
 
     qDebug() << qsMessage;
+    tbLog->append(qsMessage);
 
     return x;
 }
@@ -197,30 +212,31 @@ bool cSqliteDriver::selectAllAndViewInTable()
     qsSelectData += "SELECT author, serial, name FROM ";
     qsSelectData += qsTableName;
 
-    QSqlQueryModel model;
+    QSqlQueryModel * model = new QSqlQueryModel();
 
     bool x;
 
-    model.setQuery(qsSelectData);
-    if (model.lastError().isValid())
+    model->setQuery(qsSelectData);
+    if (model->lastError().isValid())
     {
-        qCritical() << model.lastError().text();
+        qCritical() << model->lastError().text();
         x = false;
     }
     else
     {
         x = true;
-        qDebug() << "SelectAllAndViewInTable > Model rows count=" << model.rowCount();
-        for (int row = 0; row < model.rowCount(); ++row)
+        qDebug() << "SelectAllAndViewInTable > Model rows count=" << model->rowCount();
+        for (int row = 0; row < model->rowCount(); ++row)
         {
-            QSqlRecord record = model.record(row);
+            QSqlRecord record = model->record(row);
             QString qsAuthor = record.value("author").toString();
-            QString qsSerial = model.record(row).value("serial").toString();
-            QString qsBook = model.record(row).value("name").toString();
+            QString qsSerial = record.value("serial").toString();
+            QString qsBook = record.value("name").toString();
             qDebug() << qsAuthor << qsSerial << qsBook;
         }
 
-        TableView->setModel(&model);
+        TableView->setModel(model);
+        TableView->show();
     }
     qsMessage = qsName;
     qsMessage += " > Select data from the table ";
@@ -240,6 +256,7 @@ bool cSqliteDriver::selectAllAndViewInTable()
     }
 
     qDebug() << qsMessage;
+    tbLog->append(qsMessage);
 
     return x;
 }
