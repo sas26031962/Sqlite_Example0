@@ -30,6 +30,7 @@ public:
     ~cControlIncoming();
 
     //Методы
+    QString getRequest();
 
 signals:
 

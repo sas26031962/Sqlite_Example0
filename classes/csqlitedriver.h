@@ -47,6 +47,7 @@ public:
     bool insertRecord(std::tuple<QString, QString, QString> data);
     bool selectAllAndShow();
     bool selectAllAndViewInTable();
+    bool execRequest();
     void showSelectionResult(QSqlQuery query);
 
 signals:

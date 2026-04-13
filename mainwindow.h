@@ -29,6 +29,7 @@ private slots:
     bool execActionCreateTable();
     bool execActionInsertRecord();
     bool execActionSelectAll();
+    bool execActionExecRequest();
     bool execActionCloseDatabase();
 
 public slots:

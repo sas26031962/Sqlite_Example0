@@ -263,6 +263,46 @@ bool cSqliteDriver::selectAllAndViewInTable()
     return x;
 }
 
+bool cSqliteDriver::execRequest()
+{
+    QString qsExecRequest = ControlIncoming->getRequest();
+
+    QSqlQueryModel * model = new QSqlQueryModel();
+
+    bool x;
+
+    model->setQuery(qsExecRequest);
+    if (model->lastError().isValid())
+    {
+        qCritical() << model->lastError().text();
+        x = false;
+    }
+    else
+    {
+        x = true;
+        TableView->setModel(model);
+        TableView->show();
+    }
+    qsMessage = qsName;
+    qsMessage += " > Select data from the table ";
+    qsMessage += qsTableName;
+    qsMessage += ": Data select";
+    if (x)
+    {
+        qsMessage += " success!";
+    }
+    else
+    {
+        qsMessage +=  " error:";
+        qsMessage += model->lastError().text();
+    }
+
+    qDebug() << qsMessage;
+    tbLog->append(qsMessage);
+
+    return x;
+}
+
 void cSqliteDriver::showSelectionResult(QSqlQuery query)
 {
     qDebug() << "\nBooks list:";

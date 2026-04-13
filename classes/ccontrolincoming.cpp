@@ -48,3 +48,8 @@ cControlIncoming::~cControlIncoming()
 {
 
 }
+
+QString cControlIncoming::getRequest()
+{
+    return leRequest->text();
+}
