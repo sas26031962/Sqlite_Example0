@@ -14,6 +14,8 @@
 #include <QGroupBox>
 #include <tuple>
 
+#include "classes/ccontrolincoming.h"
+
 class cSqliteDriver : public QObject
 {
     Q_OBJECT
@@ -26,6 +28,7 @@ class cSqliteDriver : public QObject
     QTableView * TableView;
     QTextBrowser* tbLog;
     QGroupBox * gbIncoming;
+    cControlIncoming * ControlIncoming;
 
 public:
     QString qsTableName = "books";

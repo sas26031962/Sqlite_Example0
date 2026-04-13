@@ -11,6 +11,8 @@ cSqliteDriver::cSqliteDriver(
     tbLog = text_browser_log;
     gbIncoming = groub_box_incoming;
 
+    ControlIncoming = new cControlIncoming(gbIncoming);
+
     qDebug() << "Accessable drivers: " << QSqlDatabase::drivers();
     qDebug() << "cSqliteDriver ctor";
 
