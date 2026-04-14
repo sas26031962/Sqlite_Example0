@@ -180,6 +180,7 @@ bool cSqliteDriver::selectAllAndShow()
     QString qsSelectData = "";
     qsSelectData += "SELECT id, author, serial, name FROM ";
     qsSelectData += qsTableName;
+    qsSelectData += ";";
 
     QSqlQuery query;
 
