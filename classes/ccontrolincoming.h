@@ -31,6 +31,9 @@ public:
 
     //Методы
     QString getRequest();
+    QString getAuthor();
+    QString getSerial();
+    QString getName();
 
 signals:
 

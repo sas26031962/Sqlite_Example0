@@ -53,3 +53,19 @@ QString cControlIncoming::getRequest()
 {
     return leRequest->text();
 }
+
+
+QString cControlIncoming::getAuthor()
+{
+    return leAuthor->text();
+}
+
+QString cControlIncoming::getSerial()
+{
+    return leSerial->text();
+}
+
+QString cControlIncoming::getName()
+{
+    return leName->text();
+}

@@ -10,3 +10,5 @@ programm/debug/moc_mainwindow.cpp
 programm/ui_mainwindow.h
 
 programm/debug/moc_ccontrolincoming.cpp
+
+programm/debug/qrc_resource.cpp

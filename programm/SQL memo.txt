@@ -1,0 +1,5 @@
+-- Получить число записей в таблице books
+SELECT COUNT (*) FROM books
+
+--- Удалить запись с id=1 из таблицы books
+DELETE FROM books WHERE id=1

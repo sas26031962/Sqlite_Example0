@@ -49,6 +49,9 @@ public:
     bool selectAllAndViewInTable();
     bool execRequest();
     void showSelectionResult(QSqlQuery query);
+    QString getAuthor();
+    QString getSerial();
+    QString getName();
 
 signals:
 

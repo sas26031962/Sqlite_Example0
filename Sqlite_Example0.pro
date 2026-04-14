@@ -23,3 +23,6 @@ HEADERS  += mainwindow.h \
     classes/ccontrolincoming.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    resource.qrc

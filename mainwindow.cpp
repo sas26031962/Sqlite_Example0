@@ -94,7 +94,10 @@ bool MainWindow::execActionCreateTable()
 
 bool MainWindow::execActionInsertRecord()
 {
-    auto t1 = std::make_tuple("AuthorName", "SerialName", "BookName");
+    QString qsAuthor = SqliteDriver->getAuthor();
+    QString qsSerial = SqliteDriver->getSerial();
+    QString qsName = SqliteDriver->getName();
+    auto t1 = std::make_tuple(qsAuthor, qsSerial, qsName);
     return SqliteDriver->insertRecord(t1);
 }
 

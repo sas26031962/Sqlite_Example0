@@ -316,3 +316,17 @@ void cSqliteDriver::showSelectionResult(QSqlQuery query)
     }
 }
 
+QString cSqliteDriver::getAuthor()
+{
+    return ControlIncoming->getAuthor();
+}
+
+QString cSqliteDriver::getSerial()
+{
+    return ControlIncoming->getSerial();
+}
+
+QString cSqliteDriver::getName()
+{
+    return ControlIncoming->getName();
+}
