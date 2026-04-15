@@ -11,7 +11,10 @@ cSqliteDriver::cSqliteDriver(
     tbLog = text_browser_log;
     gbIncoming = groub_box_incoming;
 
+    QHeaderView * VerticalHeader = TableView->verticalHeader();
+
     connect(TableView, &QTableView::clicked, this, &cSqliteDriver::onTableViewClicked);
+    connect(VerticalHeader, &QHeaderView::sectionClicked, this, &cSqliteDriver::onTableViewActivated);
 
     ControlIncoming = new cControlIncoming(gbIncoming);
 
@@ -343,4 +346,27 @@ void cSqliteDriver::onTableViewClicked(const QModelIndex &index)
         int col = index.column();
         qDebug() << "Clicked:" << data << " row=" << row << " col" << col;
     }
+}
+
+void cSqliteDriver::onTableViewActivated(int logical_row)
+{
+    //qDebug() << "TableViewActivated" << logical_row;
+
+    // Получаем данные из модели
+    QAbstractItemModel *model = TableView->model();
+        if (!model) return;
+
+        // Например, читаем ID из первого столбца
+        QModelIndex idIndex = model->index(logical_row, 0);
+        int id = model->data(idIndex).toInt();
+
+        QString author = model->data(model->index(logical_row, 0)).toString();
+        QString serial = model->data(model->index(logical_row, 1)).toString();
+        QString name = model->data(model->index(logical_row, 2)).toString();
+
+        qDebug() << "Выбрана запись> " << id << " Author:" << author << " Serial: " << serial << " Name:" << name;
+
+        ControlIncoming->setAuthor(author);
+        ControlIncoming->setSerial(serial);
+        ControlIncoming->setName(name);
 }

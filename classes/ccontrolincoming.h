@@ -35,6 +35,10 @@ public:
     QString getSerial();
     QString getName();
 
+    void setAuthor(QString s);
+    void setSerial(QString s);
+    void setName(QString s);
+
 signals:
 
 public slots:

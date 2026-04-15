@@ -69,3 +69,18 @@ QString cControlIncoming::getName()
 {
     return leName->text();
 }
+
+void cControlIncoming::setAuthor(QString s)
+{
+    leAuthor->setText(s);
+}
+
+void cControlIncoming::setSerial(QString s)
+{
+    leSerial->setText(s);
+}
+
+void cControlIncoming::setName(QString s)
+{
+    leName->setText(s);
+}

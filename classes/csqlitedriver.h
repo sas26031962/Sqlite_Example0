@@ -13,6 +13,8 @@
 #include <QModelIndex>
 #include <QTextBrowser>
 #include <QGroupBox>
+#include <QHeaderView>
+#include <QAbstractItemModel>
 #include <tuple>
 
 #include "classes/ccontrolincoming.h"
@@ -58,6 +60,7 @@ signals:
 
 public slots:
     void onTableViewClicked(const QModelIndex &index);
+    void onTableViewActivated(int logical_row);
 };
 
 #endif // CSQLITEDRIVER_H
