@@ -11,6 +11,8 @@ cSqliteDriver::cSqliteDriver(
     tbLog = text_browser_log;
     gbIncoming = groub_box_incoming;
 
+    connect(TableView, &QTableView::clicked, this, &cSqliteDriver::onTableViewClicked);
+
     ControlIncoming = new cControlIncoming(gbIncoming);
 
     qDebug() << "Accessable drivers: " << QSqlDatabase::drivers();
@@ -330,4 +332,15 @@ QString cSqliteDriver::getSerial()
 QString cSqliteDriver::getName()
 {
     return ControlIncoming->getName();
+}
+
+void cSqliteDriver::onTableViewClicked(const QModelIndex &index)
+{
+    if(index.isValid())
+    {
+        QString data = index.data().toString();
+        int row = index.row();
+        int col = index.column();
+        qDebug() << "Clicked:" << data << " row=" << row << " col" << col;
+    }
 }

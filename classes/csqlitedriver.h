@@ -10,6 +10,7 @@
 #include <QString>
 #include <QDebug>
 #include <QTableView>
+#include <QModelIndex>
 #include <QTextBrowser>
 #include <QGroupBox>
 #include <tuple>
@@ -56,6 +57,7 @@ public:
 signals:
 
 public slots:
+    void onTableViewClicked(const QModelIndex &index);
 };
 
 #endif // CSQLITEDRIVER_H
