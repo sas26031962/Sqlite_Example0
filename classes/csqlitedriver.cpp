@@ -339,13 +339,46 @@ QString cSqliteDriver::getName()
 
 void cSqliteDriver::onTableViewClicked(const QModelIndex &index)
 {
+    QString Message = "TableViewClicked > ";
     if(index.isValid())
     {
         QString data = index.data().toString();
         int row = index.row();
         int col = index.column();
-        qDebug() << "Clicked:" << data << " row=" << row << " col" << col;
+
+        Message += "Data=";
+        Message += data;
+        Message += " Row=";
+        Message += QString::number(row);
+        Message += " Column=";
+        Message += QString::number(col);
+        //qDebug() << "Clicked:" << data << " row=" << row << " col" << col;
+
+        switch(col)
+        {
+            case 0:
+                ControlIncoming->setAuthor(data);
+            break;
+
+            case 1:
+                ControlIncoming->setSerial(data);
+            break;
+
+            case 2:
+                ControlIncoming->setName(data);
+            break;
+
+            default:
+                Message += "Wrong row index:";
+                Message += QString::number(col);
+            break;
+        }
     }
+    else
+    {
+        Message += "Model index is not valid";
+    }
+    tbLog->append(Message);
 }
 
 void cSqliteDriver::onTableViewActivated(int logical_row)
