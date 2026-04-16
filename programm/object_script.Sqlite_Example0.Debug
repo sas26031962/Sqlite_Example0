@@ -1,0 +1,12 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\csqlitedriver.o
+./debug\ccontrolincoming.o
+./debug\cclickablelabel.o
+./debug\qrc_resource.o
+./debug\moc_mainwindow.o
+./debug\moc_csqlitedriver.o
+./debug\moc_ccontrolincoming.o
+./debug\moc_cclickablelabel.o
+);

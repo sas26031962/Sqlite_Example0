@@ -9,14 +9,17 @@ cControlIncoming::cControlIncoming(QGroupBox *group_box_parent, QObject *parent)
     lbAuthor = new QLabel(gbParent);
     lbAuthor->setText("Author");
     lbAuthor->setAlignment(Qt::AlignCenter);
+    lbAuthor->setCursor(Qt::PointingHandCursor);
 
     lbSerial = new QLabel(gbParent);
     lbSerial->setText("Serial");
     lbSerial->setAlignment(Qt::AlignCenter);
+    lbSerial->setCursor(Qt::PointingHandCursor);
 
     lbName = new QLabel(gbParent);
     lbName->setText("Name");
     lbName->setAlignment(Qt::AlignCenter);
+    lbName->setCursor(Qt::PointingHandCursor);
 
     leAuthor = new QLineEdit(gbParent);
     leAuthor->setText("Author_text");
@@ -83,4 +86,21 @@ void cControlIncoming::setSerial(QString s)
 void cControlIncoming::setName(QString s)
 {
     leName->setText(s);
+}
+
+cControlIncoming::execClickAuthorCaption()
+{
+    QClipboard *clipboard = QApplication::clipboard();
+    QString textFromClipboard = clipboard->text();
+    leAuthor->setText(textFromClipboard);
+}
+
+cControlIncoming::execClickSerialCaption()
+{
+
+}
+
+cControlIncoming::execClickNameCaption()
+{
+
 }

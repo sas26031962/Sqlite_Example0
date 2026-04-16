@@ -4,9 +4,12 @@
 #include <QObject>
 #include <QString>
 #include <QGroupBox>
-#include "QGridLayout"
+#include <QGridLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QClipboard>
+#include <QApplication>
+
 
 class cControlIncoming : public QObject
 {
@@ -42,6 +45,9 @@ public:
 signals:
 
 public slots:
+    execClickAuthorCaption();
+    execClickSerialCaption();
+    execClickNameCaption();
 };
 
 #endif // CCONTROLINCOMING_H

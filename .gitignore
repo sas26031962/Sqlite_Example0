@@ -12,3 +12,7 @@ programm/ui_mainwindow.h
 programm/debug/moc_ccontrolincoming.cpp
 
 programm/debug/qrc_resource.cpp
+
+programm/debug/moc_cclickablelabel.cpp
+
+programm/object_script.Sqlite_Example0.Release

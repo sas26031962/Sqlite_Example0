@@ -16,11 +16,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     classes/csqlitedriver.cpp \
-    classes/ccontrolincoming.cpp
+    classes/ccontrolincoming.cpp \
+    classes/cclickablelabel.cpp
 
 HEADERS  += mainwindow.h \
     classes/csqlitedriver.h \
-    classes/ccontrolincoming.h
+    classes/ccontrolincoming.h \
+    classes/cclickablelabel.h
 
 FORMS    += mainwindow.ui
 
