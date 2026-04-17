@@ -17,13 +17,13 @@ CXXFLAGS      = -pipe -fno-keep-inline-dllexport -O2 -std=gnu++0x -frtti -Wall -
 INCPATH       = -I..\..\Sqlite_Example0 -I. -I..\..\..\Qt\Qt5.6.0\5.6\mingw49_32\include -I..\..\..\Qt\Qt5.6.0\5.6\mingw49_32\include\QtWidgets -I..\..\..\Qt\Qt5.6.0\5.6\mingw49_32\include\QtGui -I..\..\..\Qt\Qt5.6.0\5.6\mingw49_32\include\QtANGLE -I..\..\..\Qt\Qt5.6.0\5.6\mingw49_32\include\QtSql -I..\..\..\Qt\Qt5.6.0\5.6\mingw49_32\include\QtCore -Irelease -I. -I..\..\..\Qt\Qt5.6.0\5.6\mingw49_32\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-s -Wl,-subsystem,windows -mthreads
-LIBS        =        -lmingw32 -LC:\Qt\Qt5.6.0\5.6\mingw49_32\lib C:\Qt\Qt5.6.0\5.6\mingw49_32\lib\libqtmain.a -LC:\utils\postgresql\pgsql\lib -LC:\utils\my_sql\my_sql\lib -lshell32 C:\Qt\Qt5.6.0\5.6\mingw49_32\lib\libQt5Widgets.a C:\Qt\Qt5.6.0\5.6\mingw49_32\lib\libQt5Gui.a C:\Qt\Qt5.6.0\5.6\mingw49_32\lib\libQt5Sql.a C:\Qt\Qt5.6.0\5.6\mingw49_32\lib\libQt5Core.a 
+LIBS        =        -lmingw32 -LC:\Qt\Qt5.6.0\5.6\mingw49_32\lib C:\Qt\Qt5.6.0\5.6\mingw49_32\lib\libqtmain.a -LC:\utils\postgresql\pgsql\lib -LC:\utils\my_sql\my_sql\lib -lshell32 C:\Qt\Qt5.6.0\5.6\mingw49_32\lib\libQt5Widgets.a C:\Qt\Qt5.6.0\5.6\mingw49_32\lib\libQt5Gui.a C:\Qt\Qt5.6.0\5.6\mingw49_32\lib\libQt5Sql.a C:\Qt\Qt5.6.0\5.6\mingw49_32\lib\libQt5Core.a release\file_res.o 
 QMAKE         = C:\Qt\Qt5.6.0\5.6\mingw49_32\bin\qmake.exe
 IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = release\file_res.o
 COPY          = copy /y
 SED           = $(QMAKE) -install sed
 COPY_FILE     = copy /y
@@ -81,8 +81,11 @@ DESTDIR_TARGET = release\Sqlite_Example0.exe
 first: all
 all: Makefile.Release  $(DESTDIR_TARGET)
 
-$(DESTDIR_TARGET): ui_mainwindow.h $(OBJECTS) 
+$(DESTDIR_TARGET): ui_mainwindow.h $(OBJECTS) release/file_res.o
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) object_script.Sqlite_Example0.Release  $(LIBS)
+
+release/file_res.o: ../file.rc
+	windres -i ..\file.rc -o release\file_res.o --include-dir=./.. $(DEFINES)
 
 qmake: FORCE
 	@$(QMAKE) -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile.Release ..\Sqlite_Example0.pro
@@ -94,6 +97,7 @@ dist:
 
 clean: compiler_clean 
 	-$(DEL_FILE) release\main.o release\mainwindow.o release\csqlitedriver.o release\ccontrolincoming.o release\cclickablelabel.o release\qrc_resource.o release\moc_mainwindow.o release\moc_csqlitedriver.o release\moc_ccontrolincoming.o release\moc_cclickablelabel.o
+	-$(DEL_FILE) release\file_res.o
 
 distclean: clean 
 	-$(DEL_FILE) $(DESTDIR_TARGET)
