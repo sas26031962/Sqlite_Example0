@@ -88,19 +88,23 @@ void cControlIncoming::setName(QString s)
     leName->setText(s);
 }
 
-cControlIncoming::execClickAuthorCaption()
+void cControlIncoming::setAuthorFromClipboard()
 {
     QClipboard *clipboard = QApplication::clipboard();
     QString textFromClipboard = clipboard->text();
     leAuthor->setText(textFromClipboard);
 }
 
-cControlIncoming::execClickSerialCaption()
+void cControlIncoming::setSerialFromClipboard()
 {
-
+    QClipboard *clipboard = QApplication::clipboard();
+    QString textFromClipboard = clipboard->text();
+    leSerial->setText(textFromClipboard);
 }
 
-cControlIncoming::execClickNameCaption()
+void cControlIncoming::setNameFromClipboard()
 {
-
+    QClipboard *clipboard = QApplication::clipboard();
+    QString textFromClipboard = clipboard->text();
+    leName->setText(textFromClipboard);
 }

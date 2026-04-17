@@ -407,17 +407,20 @@ void cSqliteDriver::onTableViewActivated(int logical_row)
 bool cSqliteDriver::setAuthor()
 {
     qDebug() << "SqliteDriver: setAuthor()";
+    ControlIncoming->setAuthorFromClipboard();
     return true;
 }
 
 bool cSqliteDriver::setSerial()
 {
     qDebug() << "SqliteDriver: setSerial()";
+    ControlIncoming->setSerialFromClipboard();
     return true;
 }
 
 bool cSqliteDriver::setName()
 {
     qDebug() << "SqliteDriver: setName()";
+    ControlIncoming->setNameFromClipboard();
     return true;
 }

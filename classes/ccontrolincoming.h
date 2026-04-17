@@ -42,12 +42,13 @@ public:
     void setSerial(QString s);
     void setName(QString s);
 
+    void setAuthorFromClipboard();
+    void setSerialFromClipboard();
+    void setNameFromClipboard();
+
 signals:
 
 public slots:
-    execClickAuthorCaption();
-    execClickSerialCaption();
-    execClickNameCaption();
 };
 
 #endif // CCONTROLINCOMING_H
