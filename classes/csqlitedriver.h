@@ -55,6 +55,9 @@ public:
     QString getAuthor();
     QString getSerial();
     QString getName();
+    bool setAuthor();
+    bool setSerial();
+    bool setName();
 
 signals:
 

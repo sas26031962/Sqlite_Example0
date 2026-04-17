@@ -31,6 +31,9 @@ private slots:
     bool execActionSelectAll();
     bool execActionExecRequest();
     bool execActionCloseDatabase();
+    bool execActionSetAuthor();
+    bool execActionSetSerial();
+    bool execActionSetName();
 
 public slots:
 

@@ -36,7 +36,31 @@ MainWindow::MainWindow(QWidget *parent) :
         if(!execActionCreateTable()) close();
     });
     ui->statusBar->addWidget(pbCreateTable);
+    //---
+    QPushButton * pbSetAuthor = new QPushButton("Set Author");
+    pbSetAuthor->setCursor(Qt::PointingHandCursor);
+    connect(pbSetAuthor, static_cast<void(QPushButton::*)()>(&QPushButton::pressed),this, [this](){
+        qDebug() << "PushButton 'Set Author' click";
+        if(!execActionSetAuthor()) close();
+    });
+    ui->statusBar->addWidget(pbSetAuthor);
 
+    QPushButton * pbSetSerial = new QPushButton("Set Serial");
+    pbSetSerial->setCursor(Qt::PointingHandCursor);
+    connect(pbSetSerial, static_cast<void(QPushButton::*)()>(&QPushButton::pressed),this, [this](){
+        qDebug() << "PushButton 'Set Serial' click";
+        if(!execActionSetSerial()) close();
+    });
+    ui->statusBar->addWidget(pbSetSerial);
+
+    QPushButton * pbSetName = new QPushButton("Set Name");
+    pbSetName->setCursor(Qt::PointingHandCursor);
+    connect(pbSetName, static_cast<void(QPushButton::*)()>(&QPushButton::pressed),this, [this](){
+        qDebug() << "PushButton 'Set Name' click";
+        if(!execActionSetName()) close();
+    });
+    ui->statusBar->addWidget(pbSetName);
+    //---
     QPushButton * pbInsertRecord = new QPushButton("Insert Record");
     pbInsertRecord->setCursor(Qt::PointingHandCursor);
     connect(pbInsertRecord, static_cast<void(QPushButton::*)()>(&QPushButton::pressed),this, [this](){
@@ -115,4 +139,22 @@ bool MainWindow::execActionExecRequest()
 bool MainWindow::execActionCloseDatabase()
 {
     return SqliteDriver->closeDatabase();
+}
+
+bool MainWindow::execActionSetAuthor()
+{
+    qDebug() << "MainWindow: execActionSetAuthor()";
+    return SqliteDriver->setAuthor();
+}
+
+bool MainWindow::execActionSetSerial()
+{
+    qDebug() << "MainWindow: execActionSetSerial()";
+    return SqliteDriver->setSerial();
+}
+
+bool MainWindow::execActionSetName()
+{
+    qDebug() << "MainWindow: execActionSetName()";
+    return SqliteDriver->setName();
 }
