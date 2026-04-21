@@ -108,3 +108,8 @@ void cControlIncoming::setNameFromClipboard()
     QString textFromClipboard = clipboard->text();
     leName->setText(textFromClipboard);
 }
+
+void cControlIncoming::setRequest(QString s)
+{
+    leRequest->setText(s);
+}
