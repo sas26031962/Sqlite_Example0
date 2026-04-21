@@ -8,6 +8,7 @@
 #include <QSqlQueryModel>
 #include <QSqlRecord>
 #include <QString>
+#include <QStringList>
 #include <QDebug>
 #include <QTableView>
 #include <QModelIndex>
@@ -15,9 +16,12 @@
 #include <QGroupBox>
 #include <QHeaderView>
 #include <QAbstractItemModel>
+#include <QComboBox>
+
 #include <tuple>
 
 #include "classes/ccontrolincoming.h"
+#include "classes/cloadfiles.h"
 
 class cSqliteDriver : public QObject
 {
@@ -27,11 +31,14 @@ class cSqliteDriver : public QObject
     QString qsName = "SqliteDriver";
     QString qsMessage;
     QString qsDatabaseName = "audiobooks.db";
+    QString qsRequestsFileName = "SQL_Requests.txt";
+    QStringList qslRequests;
 
     QTableView * TableView;
     QTextBrowser* tbLog;
     QGroupBox * gbIncoming;
     cControlIncoming * ControlIncoming;
+    QComboBox * cbHistory;
 
 public:
     QString qsTableName = "books";
@@ -39,7 +46,7 @@ public:
     QSqlDatabase db;
 
     //Конструкторы и деструкторы
-    explicit cSqliteDriver(QTableView * table_view, QTextBrowser* text_browser_log, QGroupBox * groub_box_incoming, QObject *parent = 0);
+    explicit cSqliteDriver(QTableView * table_view, QTextBrowser* text_browser_log, QGroupBox * groub_box_incoming, QComboBox * history, QObject *parent = 0);
     ~cSqliteDriver();
 
     //Методы

@@ -17,12 +17,14 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     classes/csqlitedriver.cpp \
     classes/ccontrolincoming.cpp \
-    classes/cclickablelabel.cpp
+    classes/cclickablelabel.cpp \
+    classes/cloadfiles.cpp
 
 HEADERS  += mainwindow.h \
     classes/csqlitedriver.h \
     classes/ccontrolincoming.h \
-    classes/cclickablelabel.h
+    classes/cclickablelabel.h \
+    classes/cloadfiles.h
 
 FORMS    += mainwindow.ui
 

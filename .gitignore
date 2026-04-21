@@ -16,3 +16,5 @@ programm/debug/qrc_resource.cpp
 programm/debug/moc_cclickablelabel.cpp
 
 programm/object_script.Sqlite_Example0.Release
+
+programm/object_script.Sqlite_Example0.Debug

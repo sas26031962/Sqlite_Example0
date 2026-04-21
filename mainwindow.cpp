@@ -10,7 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :
     SqliteDriver = new cSqliteDriver(
                 ui->tableView,
                 ui->textBrowserLog,
-                ui->groupBoxIncoming
+                ui->groupBoxIncoming,
+                ui->comboBoxHistory
                 );
 
     QPushButton * pbOpenDatabase = new QPushButton("Open");

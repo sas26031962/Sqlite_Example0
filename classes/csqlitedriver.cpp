@@ -4,12 +4,14 @@ cSqliteDriver::cSqliteDriver(
         QTableView *table_view,
         QTextBrowser *text_browser_log,
         QGroupBox * groub_box_incoming,
+        QComboBox *history,
         QObject *parent
         ) : QObject(parent)
 {
     TableView = table_view;
     tbLog = text_browser_log;
     gbIncoming = groub_box_incoming;
+    cbHistory = history;
 
     QHeaderView * VerticalHeader = TableView->verticalHeader();
 
@@ -23,6 +25,18 @@ cSqliteDriver::cSqliteDriver(
 
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(qsDatabaseName);
+
+    qslRequests = cLoadFiles::loadStringListFromFile(qsRequestsFileName);
+
+    qsMessage = "SqliteDriver > Load from ";
+    qsMessage += qsRequestsFileName;
+    qsMessage += " ";
+    qsMessage += QString::number(qslRequests.count());
+    qsMessage += " lines";
+    qDebug() << qsMessage;
+    tbLog->append(qsMessage);
+
+    cbHistory->addItems(qslRequests);
 }
 
 cSqliteDriver::~cSqliteDriver()

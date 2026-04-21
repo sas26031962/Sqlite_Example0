@@ -16,3 +16,6 @@ SELECT id, author, serial, name FROM books
 
 -- Получить список полей в таблице
 SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'books' AND TABLE_SCHEMA = 'audiobooks'
+
+-- Получить список записей, где совпадает часть поля
+SELECT * FROM books WHERE name LIKE '%офёр%'
