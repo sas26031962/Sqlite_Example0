@@ -3,4 +3,21 @@ DELETE FROM books WHERE id=1;
 DELETE FROM books WHERE id IN (10, 14, 45);
 SELECT * FROM books WHERE serial = '';
 SELECT id, author, serial, name FROM books
-SELECT * FROM books WHERE name LIKE '%РѕС„С‘СЂ%'
+SELECT * FROM books WHERE name LIKE '%офёр%'
+SELECT * FROM books WHERE name LIKE '%визор%'
+SELECT * FROM books WHERE serial LIKE '%ронт%'
+SELECT author, serial, name FROM books WHERE serial LIKE '%ронт%'
+SELECT author, serial, name FROM books WHERE author LIKE '%Глау%'
+SELECT author, serial, name FROM books WHERE author LIKE '%Любенко%'
+SELECT author, serial, name FROM books WHERE serial LIKE '%Драгун%'
+SELECT author, serial, name FROM books WHERE author LIKE '%Мария%'
+SELECT author, serial, name FROM books WHERE author LIKE '%Лирик%'
+SELECT author, serial, name FROM books WHERE author LIKE '%Сухов%'
+SELECT author, serial, name FROM books WHERE author LIKE '%Мопассан%'
+SELECT author, serial, name FROM books WHERE author LIKE '%Перумов%'
+SELECT author, serial, name FROM books WHERE author LIKE '%Винтеркей Серж%'
+SELECT author, serial, name FROM books WHERE author LIKE '%Булычев Андрей%'
+SELECT author, serial, name FROM books WHERE author LIKE '%Гурова%'
+SELECT author, serial, name FROM books WHERE author LIKE '%Головачёв%'
+SELECT author, serial, name FROM books WHERE author LIKE '%Злотников%'
+SELECT author, serial, name FROM books WHERE author LIKE '%Ардашев%'

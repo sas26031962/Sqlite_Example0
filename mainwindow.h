@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QPushButton>
+#include <QMessageBox>
 
 #include "classes/csqlitedriver.h"
 
@@ -22,6 +23,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+protected:
+    void closeEvent(QCloseEvent *event) override;
 
 private slots:
     bool execActionOpenDatabase();

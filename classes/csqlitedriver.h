@@ -65,12 +65,14 @@ public:
     bool setAuthor();
     bool setSerial();
     bool setName();
+    bool storeRequestHistory();
 
 signals:
 
 public slots:
     void onTableViewClicked(const QModelIndex &index);
     void onTableViewActivated(int logical_row);
+    void onHistoryIndexChanged(int index);
 };
 
 #endif // CSQLITEDRIVER_H

@@ -17,6 +17,7 @@ cSqliteDriver::cSqliteDriver(
 
     connect(TableView, &QTableView::clicked, this, &cSqliteDriver::onTableViewClicked);
     connect(VerticalHeader, &QHeaderView::sectionClicked, this, &cSqliteDriver::onTableViewActivated);
+    connect(cbHistory, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &cSqliteDriver::onHistoryIndexChanged);
 
     ControlIncoming = new cControlIncoming(gbIncoming);
 
@@ -37,6 +38,7 @@ cSqliteDriver::cSqliteDriver(
     tbLog->append(qsMessage);
 
     cbHistory->addItems(qslRequests);
+    ControlIncoming->setRequest(qslRequests.at(0));
 }
 
 cSqliteDriver::~cSqliteDriver()
@@ -287,6 +289,19 @@ bool cSqliteDriver::execRequest()
 {
     QString qsExecRequest = ControlIncoming->getRequest();
 
+    qsMessage = qsName;
+    if(qslRequests.contains(qsExecRequest))
+    {
+        qsMessage += " > contains this request";
+    }
+    else
+    {
+        qslRequests.append(qsExecRequest);
+        qsMessage += " > append this request";
+    }
+    qDebug() << qsMessage;
+    tbLog->append(qsMessage);
+
     QSqlQueryModel * model = new QSqlQueryModel();
 
     bool x;
@@ -437,4 +452,15 @@ bool cSqliteDriver::setName()
     qDebug() << "SqliteDriver: setName()";
     ControlIncoming->setNameFromClipboard();
     return true;
+}
+
+bool cSqliteDriver::storeRequestHistory()
+{
+    return cLoadFiles::saveStringListToFile(qsRequestsFileName, qslRequests);
+}
+
+void cSqliteDriver::onHistoryIndexChanged(int index)
+{
+    qDebug() << "SqligeDriver > History index changed: " << index;
+    ControlIncoming->setRequest(qslRequests.at(index));
 }

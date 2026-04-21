@@ -102,6 +102,56 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    QMessageBox::StandardButton resBtn = QMessageBox::question(
+        this, "Confirmation",
+        tr("Are you shure to exit?\n"),
+        QMessageBox::Cancel | QMessageBox::No | QMessageBox::Yes,
+        QMessageBox::Yes);
+
+    if (resBtn != QMessageBox::Yes)
+    {
+        event->ignore(); // Игнорируем событие закрытия
+    }
+    else
+    {
+        event->accept(); // Принимаем событие закрытия
+
+        //---
+        SqliteDriver->storeRequestHistory();
+        //---
+/*
+        cInitialState InitialStateInstance;
+        if(IsStand)InitialStateInstance.Mode = ecMode::STAND; else InitialStateInstance.Mode = ecMode::TEST;
+        InitialStateInstance.qsTransporterLeftContent = tpCellsObject.Left->codingAuStorage();
+        InitialStateInstance.qsTransporterRightContent = tpCellsObject.Right->codingAuStorage();
+        if(cWorkMode::WorkMode == SERIAL) InitialStateInstance.Variant = ecVariant::SERIAL; else InitialStateInstance.Variant = ecVariant::RANGE;
+
+        cIniFile::IniFile.storeInitalState(InitialStateInstance);//Запоминаем текущее состояние
+
+        ResetSignals();
+
+        qDebug() << "Store LogFile:" << QString::number(qslLog.count());
+
+        QFile LogFile("./data/DataLog.txt");
+        if(LogFile.open(QIODevice::WriteOnly | QIODevice::Text))
+        {
+            QTextStream out(&LogFile);
+            for(const QString &str : qslLog)
+            {
+                out << str << "\n";
+            }
+        }
+        LogFile.close();
+
+        qDebug() << "MainWindow Close event processing";
+
+        timerUpdate->stop();
+*/
+    }
+}
+
 bool MainWindow::execActionOpenDatabase()
 {
     return SqliteDriver->openDatabase();

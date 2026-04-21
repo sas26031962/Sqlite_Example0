@@ -41,6 +41,7 @@ public:
     void setAuthor(QString s);
     void setSerial(QString s);
     void setName(QString s);
+    void setRequest(QString s);
 
     void setAuthorFromClipboard();
     void setSerialFromClipboard();
