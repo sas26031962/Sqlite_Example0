@@ -13,7 +13,7 @@ cSqliteDriver::cSqliteDriver(
     gbIncoming = groub_box_incoming;
     cbHistory = history;
 
-    QHeaderView * VerticalHeader = TableView->verticalHeader();
+    VerticalHeader = TableView->verticalHeader();
 
     connect(TableView, &QTableView::clicked, this, &cSqliteDriver::onTableViewClicked);
     connect(VerticalHeader, &QHeaderView::sectionClicked, this, &cSqliteDriver::onTableViewActivated);
@@ -38,7 +38,7 @@ cSqliteDriver::cSqliteDriver(
     tbLog->append(qsMessage);
 
     cbHistory->addItems(qslRequests);
-    ControlIncoming->setRequest(qslRequests.at(0));
+    if(qslRequests.count() > 0) ControlIncoming->setRequest(qslRequests.at(0));
 }
 
 cSqliteDriver::~cSqliteDriver()

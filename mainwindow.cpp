@@ -95,7 +95,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->statusBar->addWidget(pbCloseDatabase);
 
     if(!execActionOpenDatabase()) this->close();
-}
+
+    qDebug() << "Window size: " << this->width() << "x" << this->height();
+
+}//End of ctor
 
 MainWindow::~MainWindow()
 {
@@ -119,36 +122,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
         event->accept(); // Принимаем событие закрытия
 
         //---
+        //if(SqliteDriver != nullptr)
         SqliteDriver->storeRequestHistory();
         //---
-/*
-        cInitialState InitialStateInstance;
-        if(IsStand)InitialStateInstance.Mode = ecMode::STAND; else InitialStateInstance.Mode = ecMode::TEST;
-        InitialStateInstance.qsTransporterLeftContent = tpCellsObject.Left->codingAuStorage();
-        InitialStateInstance.qsTransporterRightContent = tpCellsObject.Right->codingAuStorage();
-        if(cWorkMode::WorkMode == SERIAL) InitialStateInstance.Variant = ecVariant::SERIAL; else InitialStateInstance.Variant = ecVariant::RANGE;
-
-        cIniFile::IniFile.storeInitalState(InitialStateInstance);//Запоминаем текущее состояние
-
-        ResetSignals();
-
-        qDebug() << "Store LogFile:" << QString::number(qslLog.count());
-
-        QFile LogFile("./data/DataLog.txt");
-        if(LogFile.open(QIODevice::WriteOnly | QIODevice::Text))
-        {
-            QTextStream out(&LogFile);
-            for(const QString &str : qslLog)
-            {
-                out << str << "\n";
-            }
-        }
-        LogFile.close();
-
-        qDebug() << "MainWindow Close event processing";
-
-        timerUpdate->stop();
-*/
     }
 }
 

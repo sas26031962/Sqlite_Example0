@@ -30,8 +30,7 @@ class cSqliteDriver : public QObject
     //Атрибуты
     QString qsName = "SqliteDriver";
     QString qsMessage;
-    QString qsDatabaseName = "audiobooks.db";
-    QString qsRequestsFileName = "SQL_Requests.txt";
+    QString qsRequestsFileName = "../SQL_Requests.txt";
     QStringList qslRequests;
 
     QTableView * TableView;
@@ -39,11 +38,14 @@ class cSqliteDriver : public QObject
     QGroupBox * gbIncoming;
     cControlIncoming * ControlIncoming;
     QComboBox * cbHistory;
+    QHeaderView * VerticalHeader;
+
+    QSqlDatabase db;//База данных
+    QString qsDatabaseName = "../audiobooks.db";//Имя базы данных
+    QString qsTableName = "books";//Имя таблицы базы данных
 
 public:
-    QString qsTableName = "books";
 
-    QSqlDatabase db;
 
     //Конструкторы и деструкторы
     explicit cSqliteDriver(QTableView * table_view, QTextBrowser* text_browser_log, QGroupBox * groub_box_incoming, QComboBox * history, QObject *parent = 0);
