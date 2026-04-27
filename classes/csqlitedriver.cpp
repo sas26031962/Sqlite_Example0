@@ -14,6 +14,8 @@ cSqliteDriver::cSqliteDriver(
     cbHistory = history;
 
     VerticalHeader = TableView->verticalHeader();
+    HorizontalHeader = TableView->horizontalHeader();
+    HorizontalHeader->setSectionResizeMode(QHeaderView::Stretch);
 
     connect(TableView, &QTableView::clicked, this, &cSqliteDriver::onTableViewClicked);
     connect(VerticalHeader, &QHeaderView::sectionClicked, this, &cSqliteDriver::onTableViewActivated);

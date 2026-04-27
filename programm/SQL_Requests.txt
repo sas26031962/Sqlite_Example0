@@ -51,3 +51,9 @@ SELECT author, serial, name FROM books WHERE author LIKE '%Ланцов%'
 SELECT author, serial, name FROM books WHERE author LIKE '%Сапковский%'
 SELECT author, serial, name FROM books WHERE author LIKE '%Булычев%' AND serial LIKE '%Сотник%'
 SELECT author, serial, name FROM books WHERE author LIKE '%Булычев Кир%'
+SELECT author FROM books WHERE author LIKE '%Большаков%'
+SELECT author FROM books;
+SELECT id, author FROM books;
+UPDATE books SET author = 'Март Артём' WHERE id = 33;
+SELECT author, serial, name FROM books WHERE author LIKE '%Артём%'
+SELECT id, author, serial, name FROM books WHERE author LIKE '%Артём%'

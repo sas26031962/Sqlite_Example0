@@ -39,6 +39,7 @@ class cSqliteDriver : public QObject
     cControlIncoming * ControlIncoming;
     QComboBox * cbHistory;
     QHeaderView * VerticalHeader;
+    QHeaderView * HorizontalHeader;
 
     QSqlDatabase db;//База данных
     QString qsDatabaseName = "../audiobooks.db";//Имя базы данных
