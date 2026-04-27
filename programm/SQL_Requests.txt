@@ -52,5 +52,3 @@ SELECT author, serial, name FROM books WHERE author LIKE '%Коул%'
 SELECT author, serial, name FROM books WHERE author LIKE '%Лондон%'
 SELECT author, serial, name FROM books WHERE author LIKE '%Константин%'
 SELECT author, serial, name FROM books WHERE author LIKE '%Ланцов%'
-SELECT * FROM books WHERE author LIKE '%Мария%'
-DELETE FROM books WHERE id=135;
