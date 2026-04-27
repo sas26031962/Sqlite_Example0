@@ -57,3 +57,14 @@ SELECT id, author FROM books;
 UPDATE books SET author = 'Март Артём' WHERE id = 33;
 SELECT author, serial, name FROM books WHERE author LIKE '%Артём%'
 SELECT id, author, serial, name FROM books WHERE author LIKE '%Артём%'
+SELECT author, serial, name FROM books WHERE author LIKE '%Булычев Ан%'
+SELECT author, serial, name FROM books WHERE author LIKE '%Булычев К%'
+SELECT id, author, serial, name FROM books WHERE author LIKE '%Булычев Кир%'
+UPDATE books SET author = 'Можейко Игорь, Булычев Кир' WHERE id = 247;
+UPDATE books SET author = 'Можейко Игорь, Булычев Кир' WHERE id = 248;
+SELECT author, serial, name FROM books WHERE author LIKE '%Булычев А%'
+SELECT author, serial, name FROM books WHERE author LIKE '%Булычев А%' AND serial LIKE '%Дра%'
+SELECT author, serial, name FROM books WHERE author LIKE '%Булычев К%' 
+SELECT author, serial, name FROM books WHERE author LIKE '%Булычев А%' 
+SELECT author, serial, name FROM books WHERE author LIKE '%Булычев А%' AND serial LIKE '%Еге%'
+SELECT author, serial, name FROM books WHERE author LIKE '%Булычев А%' AND serial LIKE '%Сотник%'
