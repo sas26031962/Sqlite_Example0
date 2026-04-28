@@ -133,6 +133,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
         //---
         //if(SqliteDriver != nullptr)
         SqliteDriver->storeRequestHistory();
+        SqliteDriver->storeAuthorsList();
         //---
     }
 }

@@ -462,6 +462,11 @@ bool cSqliteDriver::storeRequestHistory()
     return cLoadFiles::saveStringListToFile(qsRequestsFileName, qslRequests);
 }
 
+bool cSqliteDriver::storeAuthorsList()
+{
+    return cLoadFiles::saveStringListToFile(qsAuthorsFileName, qslAuthors);
+}
+
 void cSqliteDriver::onHistoryIndexChanged(int index)
 {
     qDebug() << "SqligeDriver > History index changed: " << index;

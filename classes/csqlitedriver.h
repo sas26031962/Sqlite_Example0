@@ -31,6 +31,7 @@ class cSqliteDriver : public QObject
     QString qsName = "SqliteDriver";
     QString qsMessage;
     QString qsRequestsFileName = "../SQL_Requests.txt";
+    QString qsAuthorsFileName = "../Authors.txt";
     QStringList qslRequests;
     QStringList qslAuthors;
 
@@ -70,6 +71,7 @@ public:
     bool setSerial();
     bool setName();
     bool storeRequestHistory();
+    bool storeAuthorsList();
     bool getAuthorList();
 
 signals:
