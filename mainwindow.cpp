@@ -94,6 +94,15 @@ MainWindow::MainWindow(QWidget *parent) :
     });
     ui->statusBar->addWidget(pbCloseDatabase);
 
+    //--- Подключение действий
+    connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
+    //connect(ui->actionGetAuthorList, static_cast<void(QAction::*)(bool)>(&QAction::toggled),this, [this](bool x){
+    connect(ui->actionGetAuthorList, &QAction::triggered, [this](bool x){
+        qDebug() << "MainMenu 'getAuthorList' click: " << x;
+        if(!SqliteDriver->getAuthorList()) close();
+    });
+
+    //--- Открытие базы данных
     if(!execActionOpenDatabase()) this->close();
 
     qDebug() << "Window size: " << this->width() << "x" << this->height();

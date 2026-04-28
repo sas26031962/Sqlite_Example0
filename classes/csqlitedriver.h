@@ -32,6 +32,7 @@ class cSqliteDriver : public QObject
     QString qsMessage;
     QString qsRequestsFileName = "../SQL_Requests.txt";
     QStringList qslRequests;
+    QStringList qslAuthors;
 
     QTableView * TableView;
     QTextBrowser* tbLog;
@@ -69,6 +70,7 @@ public:
     bool setSerial();
     bool setName();
     bool storeRequestHistory();
+    bool getAuthorList();
 
 signals:
 

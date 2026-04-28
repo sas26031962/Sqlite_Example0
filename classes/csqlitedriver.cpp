@@ -466,3 +466,67 @@ void cSqliteDriver::onHistoryIndexChanged(int index)
     qDebug() << "SqligeDriver > History index changed: " << index;
     ControlIncoming->setRequest(qslRequests.at(index));
 }
+
+bool cSqliteDriver::getAuthorList()
+{
+    QString qsAuthorListRequest = "";
+    qsAuthorListRequest += "SELECT id, author FROM ";
+    qsAuthorListRequest += qsTableName;
+
+    QSqlQueryModel * model = new QSqlQueryModel();
+
+    bool x;
+
+    model->setQuery(qsAuthorListRequest);
+    if (model->lastError().isValid())
+    {
+        qCritical() << model->lastError().text();
+        x = false;
+    }
+    else
+    {
+        x = true;
+        qDebug() << "GetAuthorListRequest > Model rows count=" << model->rowCount();
+        qslAuthors.clear();
+        for (int row = 0; row < model->rowCount(); ++row)
+        {
+            QSqlRecord record = model->record(row);
+            int Id = record.value("id").toInt();
+            QString qsAuthor = record.value("author").toString();
+            qDebug() << Id << qsAuthor;
+            if(qslAuthors.contains(qsAuthor))
+            {
+                qsMessage += " > contains this author";
+            }
+            else
+            {
+                qslAuthors.append(qsAuthor);
+                qsMessage += " > append this author";
+            }
+
+        }
+
+        TableView->setModel(model);
+        TableView->show();
+    }
+    qsMessage = qsName;
+    qsMessage += " > GetAuthorListRequest: length = ";
+    qsMessage += QString::number(qslAuthors.count());
+    if (x)
+    {
+        qsMessage += " success!";
+        //---
+        //showSelectionResult(query);
+        //---
+    }
+    else
+    {
+        qsMessage +=  " error:";
+        //qsMessage += query.lastError().text();
+    }
+
+    qDebug() << qsMessage;
+    tbLog->append(qsMessage);
+
+    return x;
+}
