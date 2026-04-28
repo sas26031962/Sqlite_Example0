@@ -300,6 +300,7 @@ bool cSqliteDriver::execRequest()
     {
         qslRequests.append(qsExecRequest);
         qsMessage += " > append this request";
+        cbHistory->addItem(qsExecRequest);
     }
     qDebug() << qsMessage;
     tbLog->append(qsMessage);
@@ -515,13 +516,11 @@ bool cSqliteDriver::getAuthorList()
     if (x)
     {
         qsMessage += " success!";
-        //---
-        //showSelectionResult(query);
-        //---
     }
     else
     {
-        qsMessage +=  " error:";
+        qsMessage +=  " error";
+        //qsMessage += ": ";
         //qsMessage += query.lastError().text();
     }
 
