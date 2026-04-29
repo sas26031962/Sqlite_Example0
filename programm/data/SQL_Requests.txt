@@ -70,3 +70,5 @@ SELECT author, serial, name FROM books WHERE author LIKE '%Булычев А%' AND seria
 SELECT author, serial, name FROM books WHERE author LIKE '%Булычев А%' AND serial LIKE '%Сотник%'
 SELECT id, author, serial, name FROM books WHERE author LIKE '%Булычев К%'
 DELETE FROM books WHERE id=255;
+SELECT author, serial, name FROM books WHERE author LIKE '%Тамоников%'  AND serial LIKE '%Честь%'
+SELECT author, serial, name FROM books WHERE author LIKE '%Тамоников%'  AND serial LIKE '%%'

@@ -36,29 +36,29 @@ MainWindow::MainWindow(QWidget *parent) :
                 );
 
     //Создание кнопок управления
-    QPushButton * pbOpenDatabase = new QPushButton("Open");
-    pbOpenDatabase->setCursor(Qt::PointingHandCursor);
-    connect(pbOpenDatabase, static_cast<void(QPushButton::*)()>(&QPushButton::pressed),this, [this](){
-        qDebug() << "PushButton 'Open' click";
-        if(!execActionOpenDatabase()) this->close();
-    });
-    ui->statusBar->addWidget(pbOpenDatabase);
+//    QPushButton * pbOpenDatabase = new QPushButton("Open");
+//    pbOpenDatabase->setCursor(Qt::PointingHandCursor);
+//    connect(pbOpenDatabase, static_cast<void(QPushButton::*)()>(&QPushButton::pressed),this, [this](){
+//        qDebug() << "PushButton 'Open' click";
+//        if(!execActionOpenDatabase()) this->close();
+//    });
+//    ui->statusBar->addWidget(pbOpenDatabase);
 
-    QPushButton * pbDropTable = new QPushButton("Drop Table");
-    pbDropTable->setCursor(Qt::PointingHandCursor);
-    connect(pbDropTable, static_cast<void(QPushButton::*)()>(&QPushButton::pressed),this, [this](){
-        qDebug() << "PushButton 'Drop table' click";
-        if(!execActionDropTable()) close();
-    });
-    ui->statusBar->addWidget(pbDropTable);
+//    QPushButton * pbDropTable = new QPushButton("Drop Table");
+//    pbDropTable->setCursor(Qt::PointingHandCursor);
+//    connect(pbDropTable, static_cast<void(QPushButton::*)()>(&QPushButton::pressed),this, [this](){
+//        qDebug() << "PushButton 'Drop table' click";
+//        if(!execActionDropTable()) close();
+//    });
+//    ui->statusBar->addWidget(pbDropTable);
 
-    QPushButton * pbCreateTable = new QPushButton("Create Table");
-    pbCreateTable->setCursor(Qt::PointingHandCursor);
-    connect(pbCreateTable, static_cast<void(QPushButton::*)()>(&QPushButton::pressed),this, [this](){
-        qDebug() << "PushButton 'Create table' click";
-        if(!execActionCreateTable()) close();
-    });
-    ui->statusBar->addWidget(pbCreateTable);
+//    QPushButton * pbCreateTable = new QPushButton("Create Table");
+//    pbCreateTable->setCursor(Qt::PointingHandCursor);
+//    connect(pbCreateTable, static_cast<void(QPushButton::*)()>(&QPushButton::pressed),this, [this](){
+//        qDebug() << "PushButton 'Create table' click";
+//        if(!execActionCreateTable()) close();
+//    });
+//    ui->statusBar->addWidget(pbCreateTable);
     //---
     QPushButton * pbSetAuthor = new QPushButton("Set Author");
     pbSetAuthor->setCursor(Qt::PointingHandCursor);
@@ -108,17 +108,39 @@ MainWindow::MainWindow(QWidget *parent) :
     });
     ui->statusBar->addWidget(pbExecRequest);
 
-    QPushButton * pbCloseDatabase = new QPushButton("Close");
-    pbCloseDatabase->setCursor(Qt::PointingHandCursor);
-    connect(pbCloseDatabase, static_cast<void(QPushButton::*)()>(&QPushButton::pressed),this, [this](){
-        qDebug() << "PushButton 'Close database' click";
-        if(!execActionCloseDatabase()) close();
-    });
-    ui->statusBar->addWidget(pbCloseDatabase);
+//    QPushButton * pbCloseDatabase = new QPushButton("Close");
+//    pbCloseDatabase->setCursor(Qt::PointingHandCursor);
+//    connect(pbCloseDatabase, static_cast<void(QPushButton::*)()>(&QPushButton::pressed),this, [this](){
+//        qDebug() << "PushButton 'Close database' click";
+//        if(!execActionCloseDatabase()) close();
+//    });
+//    ui->statusBar->addWidget(pbCloseDatabase);
 
     //--- Подключение действий
+    //File
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
-    //connect(ui->actionGetAuthorList, static_cast<void(QAction::*)(bool)>(&QAction::toggled),this, [this](bool x){
+    //Actions
+
+    connect(ui->actionOpen, &QAction::triggered, [this](bool x){
+        qDebug() << "PushButton 'Open' click: " << x;
+        if(!execActionOpenDatabase()) this->close();
+    });
+
+    connect(ui->actionDropTable, &QAction::triggered, [this](bool x){
+        qDebug() << "PushButton 'Drop table' click: " << x;
+        if(!execActionDropTable()) close();
+    });
+
+    connect(ui->actionCreateTable, &QAction::triggered, [this](bool x){
+        qDebug() << "PushButton 'Create table' click: " << x;
+        if(!execActionCreateTable()) close();
+    });
+
+    connect(ui->actionClose, &QAction::triggered, [this](bool x){
+        qDebug() << "PushButton 'Close database' click: " << x;
+        if(!execActionCloseDatabase()) close();
+    });
+
     connect(ui->actionGetAuthorList, &QAction::triggered, [this](bool x){
         qDebug() << "MainMenu 'getAuthorList' click: " << x;
         if(!SqliteDriver->getAuthorList()) close();
