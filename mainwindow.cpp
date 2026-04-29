@@ -7,6 +7,27 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //cSqliteDriver::qsApplicationPath = QCoreApplication::applicationFilePath();
+
+    QString Message = "MainWindow > ";
+    QString qsFullApplicationPath = QCoreApplication::applicationFilePath();
+    int SlashPosition = qsFullApplicationPath.indexOf("/release");
+    if(SlashPosition < 0)
+    {
+        SlashPosition = qsFullApplicationPath.indexOf("/debug");
+        if(SlashPosition < 0)
+        {
+            Message += "no /debug section in ApplicationPath, exit!";
+            ui->textBrowserLog->append(Message);
+            close();
+        }
+    }
+    //Извлечение пути к приложению
+    cSqliteDriver::qsApplicationPath = qsFullApplicationPath.mid(0, SlashPosition);
+    Message += "ApplicationPath = ";
+    Message += cSqliteDriver::qsApplicationPath;
+    ui->textBrowserLog->append(Message);
+
     SqliteDriver = new cSqliteDriver(
                 ui->tableView,
                 ui->textBrowserLog,
@@ -14,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
                 ui->comboBoxHistory
                 );
 
+    //Создание кнопок управления
     QPushButton * pbOpenDatabase = new QPushButton("Open");
     pbOpenDatabase->setCursor(Qt::PointingHandCursor);
     connect(pbOpenDatabase, static_cast<void(QPushButton::*)()>(&QPushButton::pressed),this, [this](){

@@ -1,5 +1,7 @@
 #include "csqlitedriver.h"
 
+QString cSqliteDriver::qsApplicationPath = "";
+
 cSqliteDriver::cSqliteDriver(
         QTableView *table_view,
         QTextBrowser *text_browser_log,
@@ -27,12 +29,12 @@ cSqliteDriver::cSqliteDriver(
     qDebug() << "cSqliteDriver ctor";
 
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(qsDatabaseName);
+    db.setDatabaseName(qsApplicationPath + qsDatabaseName);
 
-    qslRequests = cLoadFiles::loadStringListFromFile(qsRequestsFileName);
+    qslRequests = cLoadFiles::loadStringListFromFile(qsApplicationPath + qsRequestsFileName);
 
     qsMessage = "SqliteDriver > Load from ";
-    qsMessage += qsRequestsFileName;
+    qsMessage += qsApplicationPath + qsRequestsFileName;
     qsMessage += " ";
     qsMessage += QString::number(qslRequests.count());
     qsMessage += " lines";
@@ -54,7 +56,7 @@ bool cSqliteDriver::openDatabase()
     bool x = db.open();
     qsMessage = qsName;
     qsMessage += " > Open ";
-    qsMessage += qsDatabaseName;
+    qsMessage += qsApplicationPath + qsDatabaseName;
     if (x)
     {
         qsMessage += " database success.";
@@ -459,12 +461,12 @@ bool cSqliteDriver::setName()
 
 bool cSqliteDriver::storeRequestHistory()
 {
-    return cLoadFiles::saveStringListToFile(qsRequestsFileName, qslRequests);
+    return cLoadFiles::saveStringListToFile(qsApplicationPath + qsRequestsFileName, qslRequests);
 }
 
 bool cSqliteDriver::storeAuthorsList()
 {
-    return cLoadFiles::saveStringListToFile(qsAuthorsFileName, qslAuthors);
+    return cLoadFiles::saveStringListToFile(qsApplicationPath + qsAuthorsFileName, qslAuthors);
 }
 
 void cSqliteDriver::onHistoryIndexChanged(int index)
