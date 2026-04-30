@@ -35,6 +35,8 @@ MainWindow::MainWindow(QWidget *parent) :
                 ui->comboBoxHistory
                 );
 
+    ExtrnalData = new cExternalData(ui->groupBoxExternalData);
+
     //Создание кнопок управления
 //    QPushButton * pbOpenDatabase = new QPushButton("Open");
 //    pbOpenDatabase->setCursor(Qt::PointingHandCursor);

@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>831</width>
-    <height>424</height>
+    <height>474</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Sqlite_Example0</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QTableView" name="tableView">
@@ -28,7 +28,7 @@
     <property name="geometry">
      <rect>
       <x>640</x>
-      <y>240</y>
+      <y>290</y>
       <width>181</width>
       <height>21</height>
      </rect>
@@ -44,7 +44,7 @@
     <property name="geometry">
      <rect>
       <x>640</x>
-      <y>270</y>
+      <y>320</y>
       <width>181</width>
       <height>91</height>
      </rect>
@@ -54,7 +54,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>230</y>
+      <y>280</y>
       <width>621</width>
       <height>101</height>
      </rect>
@@ -67,10 +67,23 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>340</y>
+      <y>390</y>
       <width>621</width>
       <height>22</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBoxExternalData">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>230</y>
+      <width>811</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>ExternalData</string>
     </property>
    </widget>
   </widget>
