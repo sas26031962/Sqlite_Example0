@@ -36,6 +36,16 @@ cExternalData::cExternalData(QGroupBox *group_box_parent, QObject *parent) : QOb
 
     int Margin = 3;
     layout->setContentsMargins(Margin, Margin, Margin, Margin);
+
+    qslDataList = cLoadFiles::loadStringListFromFile(cSqliteDriver::qsApplicationPath + qsFileName);
+    if(qslDataList.count() > 0)
+    {
+        leCurrentString->setText(qslDataList.at(CurrentIndex));
+    }
+    else
+    {
+        leCurrentString->setText("External data file is empty, nothing to show");
+    }
 }
 
 cExternalData::~cExternalData()

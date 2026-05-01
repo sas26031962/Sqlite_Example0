@@ -9,6 +9,9 @@
 #include <QLineEdit>
 #include <QClipboard>
 #include <QApplication>
+#include <QStringList>
+
+#include "classes/csqlitedriver.h"
 
 class cExternalData : public QObject
 {
@@ -20,6 +23,11 @@ class cExternalData : public QObject
     QLineEdit * leCurrentString;
     QPushButton * pbPrevious;
     QPushButton * pbNext;
+
+    QStringList qslDataList;
+    QString qsFileName = "/data/ExternalText.txt";
+
+    int CurrentIndex = 0;
 
 public:
     explicit cExternalData(QGroupBox * group_box_parent, QObject *parent = 0);
