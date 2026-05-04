@@ -36,6 +36,9 @@ MainWindow::MainWindow(QWidget *parent) :
                 );
 
     ExtrnalData = new cExternalData(ui->groupBoxExternalData);
+    connect(ExtrnalData, &cExternalData::closeMainProgramm, this, &MainWindow::close);
+    connect(ExtrnalData, &cExternalData::setStatus, SqliteDriver, &cSqliteDriver::showMessage);
+    connect(ExtrnalData, &cExternalData::setDataString, SqliteDriver, &cSqliteDriver::execSetDataString);
 
     //Создание кнопок управления
 //    QPushButton * pbOpenDatabase = new QPushButton("Open");

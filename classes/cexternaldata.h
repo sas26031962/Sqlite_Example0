@@ -7,10 +7,12 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QLineEdit>
+#include <QString>
+#include <QStringList>
 #include <QClipboard>
 #include <QApplication>
-#include <QStringList>
 
+#include "classes/cloadfiles.h"
 #include "classes/csqlitedriver.h"
 
 class cExternalData : public QObject
@@ -23,17 +25,18 @@ class cExternalData : public QObject
     QLineEdit * leCurrentString;
     QPushButton * pbPrevious;
     QPushButton * pbNext;
-
-    QStringList qslDataList;
-    QString qsFileName = "/data/ExternalText.txt";
-
-    int CurrentIndex = 0;
+    QStringList qslData;
+    int DataIndex = 0;
+    QString DataFileName = "/data/ExternalText.txt";
 
 public:
     explicit cExternalData(QGroupBox * group_box_parent, QObject *parent = 0);
     ~cExternalData();
 
 signals:
+    void closeMainProgramm();
+    void setStatus(QString s);
+    void setDataString(QString s);
 
 public slots:
 };

@@ -39,7 +39,7 @@ cSqliteDriver::cSqliteDriver(
     qsMessage += QString::number(qslRequests.count());
     qsMessage += " lines";
     qDebug() << qsMessage;
-    tbLog->append(qsMessage);
+    showMessage(qsMessage);
 
     cbHistory->addItems(qslRequests);
     if(qslRequests.count() > 0) ControlIncoming->setRequest(qslRequests.at(0));
@@ -67,7 +67,7 @@ bool cSqliteDriver::openDatabase()
         qsMessage += db.lastError().text();
     }
     qDebug() << qsMessage;
-    tbLog->append(qsMessage);
+    showMessage(qsMessage);
 
     return x;
 }
@@ -78,7 +78,7 @@ bool cSqliteDriver::closeDatabase()
     qsMessage = qsName;
     qsMessage += " > Connection close.";
     qDebug() << qsMessage;
-    tbLog->append(qsMessage);
+    showMessage(qsMessage);
 
     return true;
 }
@@ -106,7 +106,7 @@ bool cSqliteDriver::dropTable()
         qsMessage += query.lastError().text();
     }
     qDebug() << qsMessage;
-    tbLog->append(qsMessage);
+    showMessage(qsMessage);
 
     return x;
 }
@@ -144,7 +144,7 @@ bool cSqliteDriver::createTable()
     }
 
     qDebug() << qsMessage;
-    tbLog->append(qsMessage);
+    showMessage(qsMessage);
 
     return x;
 }
@@ -195,7 +195,7 @@ bool cSqliteDriver::insertRecord(std::tuple<QString, QString, QString> data)
     }
 
     qDebug() << qsMessage;
-    tbLog->append(qsMessage);
+    showMessage(qsMessage);
 
     return x;
 }
@@ -229,7 +229,7 @@ bool cSqliteDriver::selectAllAndShow()
     }
 
     qDebug() << qsMessage;
-    tbLog->append(qsMessage);
+    showMessage(qsMessage);
 
     return x;
 }
@@ -284,7 +284,7 @@ bool cSqliteDriver::selectAllAndViewInTable()
     }
 
     qDebug() << qsMessage;
-    tbLog->append(qsMessage);
+    showMessage(qsMessage);
 
     return x;
 }
@@ -305,7 +305,7 @@ bool cSqliteDriver::execRequest()
         cbHistory->addItem(qsExecRequest);
     }
     qDebug() << qsMessage;
-    tbLog->append(qsMessage);
+    showMessage(qsMessage);
 
     QSqlQueryModel * model = new QSqlQueryModel();
 
@@ -338,7 +338,7 @@ bool cSqliteDriver::execRequest()
     }
 
     qDebug() << qsMessage;
-    tbLog->append(qsMessage);
+    showMessage(qsMessage);
 
     return x;
 }
@@ -412,7 +412,7 @@ void cSqliteDriver::onTableViewClicked(const QModelIndex &index)
     {
         Message += "Model index is not valid";
     }
-    tbLog->append(Message);
+    showMessage(qsMessage);
 }
 
 void cSqliteDriver::onTableViewActivated(int logical_row)
@@ -532,7 +532,39 @@ bool cSqliteDriver::getAuthorList()
     }
 
     qDebug() << qsMessage;
-    tbLog->append(qsMessage);
+    showMessage(qsMessage);
 
     return x;
+}
+
+void cSqliteDriver::showMessage(QString s)
+{
+    tbLog->append(s);
+
+}
+
+void cSqliteDriver::execSetDataString(QString s)
+{
+    qDebug() << qsName << " > Full data string = " << s;
+    int iLeftBracketStquareIndex = s.indexOf('[');
+    QString qsData = s.mid(0, iLeftBracketStquareIndex - 1);
+    qDebug() << qsName << " > Left data string = " << qsData;
+    int iDashIndex = s.indexOf(" - ");
+    int iDotIndex = s.indexOf('.');
+    QString qsAuthor = qsData.mid(0, iDashIndex);
+    QString qsSerial = "";//qsData.mid(iDashIndex + 3, iDotIndex - iDashIndex - 3);
+    QString qsBook;
+    if(iDotIndex > 0)
+    {
+        qsSerial = qsData.mid(iDashIndex + 3, iDotIndex - iDashIndex - 3);
+        qsBook = qsData.mid(iDotIndex + 2);
+    }
+    else
+    {
+        qsBook = qsData.mid(iDashIndex + 3);
+    }
+    qDebug() << qsName << " > Author = " << qsAuthor << " Serial = " << qsSerial << " Name = " << qsBook;
+    ControlIncoming->setAuthor(qsAuthor);
+    ControlIncoming->setSerial(qsSerial);
+    ControlIncoming->setName(qsBook);
 }

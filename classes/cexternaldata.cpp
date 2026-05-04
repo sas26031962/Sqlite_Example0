@@ -37,32 +37,37 @@ cExternalData::cExternalData(QGroupBox *group_box_parent, QObject *parent) : QOb
     int Margin = 3;
     layout->setContentsMargins(Margin, Margin, Margin, Margin);
 
-    qslDataList = cLoadFiles::loadStringListFromFile(cSqliteDriver::qsApplicationPath + qsFileName);
-    if(qslDataList.count() > 0)
+    QString qsFullPaht = cSqliteDriver::qsApplicationPath + DataFileName;
+    qslData = cLoadFiles::loadStringListFromFile(qsFullPaht);
+    int DataLinesCount = qslData.count();
+    qDebug() << "Load from file: " << DataLinesCount << " lines";
+    if(DataLinesCount > 0)
     {
-        leCurrentString->setText(qslDataList.at(CurrentIndex));
+        leCurrentString->setText(qslData.at(DataIndex));
+        emit setDataString(qslData.at(DataIndex));
+
+        connect(pbPrevious, static_cast<void(QPushButton::*)()>(&QPushButton::pressed),this, [this](){
+            qDebug() << "PushButton 'Previous' click";
+              DataIndex--;
+              if(DataIndex < 0) DataIndex = 0;
+              leCurrentString->setText(qslData.at(DataIndex));
+              emit setDataString(qslData.at(DataIndex));
+              emit setStatus("Previous click:" + QString::number(DataIndex));
+        });
+
+        connect(pbNext, static_cast<void(QPushButton::*)()>(&QPushButton::pressed),this, [this](){
+            qDebug() << "PushButton 'Next' click";
+              DataIndex++;
+              if(DataIndex == qslData.count()) DataIndex = qslData.count() - 1;
+              leCurrentString->setText(qslData.at(DataIndex));
+              emit setDataString(qslData.at(DataIndex));
+              emit setStatus("Next click:" + QString::number(DataIndex));
+        });
     }
     else
     {
-        leCurrentString->setText("External data file is empty, nothing to show");
+        emit closeMainProgramm();
     }
-
-    connect(pbPrevious, static_cast<void(QPushButton::*)()>(&QPushButton::pressed),this, [this](){
-        qDebug() << "PushButton 'Previous' click";
-        CurrentIndex--;
-        if(CurrentIndex < 0) {CurrentIndex = 0;}
-
-        leCurrentString->setText(qslDataList.at(CurrentIndex));
-    });
-
-    connect(pbNext, static_cast<void(QPushButton::*)()>(&QPushButton::pressed),this, [this](){
-        qDebug() << "PushButton 'Next' click";
-        CurrentIndex++;
-        if(CurrentIndex == qslDataList.count()) {CurrentIndex--;}
-
-        leCurrentString->setText(qslDataList.at(CurrentIndex));
-    });
-
 }
 
 cExternalData::~cExternalData()

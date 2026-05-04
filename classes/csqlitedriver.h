@@ -80,6 +80,8 @@ public slots:
     void onTableViewClicked(const QModelIndex &index);
     void onTableViewActivated(int logical_row);
     void onHistoryIndexChanged(int index);
+    void showMessage(QString s);
+    void execSetDataString(QString s);
 };
 
 #endif // CSQLITEDRIVER_H
