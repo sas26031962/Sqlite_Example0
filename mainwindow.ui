@@ -111,6 +111,7 @@
     <addaction name="actionCreateTable"/>
     <addaction name="actionClose"/>
     <addaction name="actionGetAuthorList"/>
+    <addaction name="actionCheckRecordInclusion"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuActions"/>
@@ -152,6 +153,11 @@
   <action name="actionClose">
    <property name="text">
     <string>Close</string>
+   </property>
+  </action>
+  <action name="actionCheckRecordInclusion">
+   <property name="text">
+    <string>CheckRecordInclusion</string>
    </property>
   </action>
  </widget>

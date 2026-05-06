@@ -549,11 +549,10 @@ void cSqliteDriver::execSetDataString(QString s)
     int iLeftBracketStquareIndex = s.indexOf('[');
     QString qsData = s.mid(0, iLeftBracketStquareIndex - 1);
     qDebug() << qsName << " > Left data string = " << qsData;
+
     int iDashIndex = s.indexOf(" - ");
     int iDotIndex = s.indexOf('.');
-    QString qsAuthor = qsData.mid(0, iDashIndex);
-    QString qsSerial = "";//qsData.mid(iDashIndex + 3, iDotIndex - iDashIndex - 3);
-    QString qsBook;
+    qsAuthor = qsData.mid(0, iDashIndex);
     if(iDotIndex > 0)
     {
         qsSerial = qsData.mid(iDashIndex + 3, iDotIndex - iDashIndex - 3);
@@ -567,4 +566,78 @@ void cSqliteDriver::execSetDataString(QString s)
     ControlIncoming->setAuthor(qsAuthor);
     ControlIncoming->setSerial(qsSerial);
     ControlIncoming->setName(qsBook);
+
+    checkDataIncludion();
 }
+
+bool cSqliteDriver::checkDataIncludion()
+{
+    QString qsExecRequest = "SELECT author, serial, name from ";
+    qsExecRequest += qsTableName;
+    qsExecRequest += " WHERE ";
+    qsExecRequest += "author";
+    qsExecRequest += " = '";
+    qsExecRequest += qsAuthor;
+    qsExecRequest += "' AND ";
+    qsExecRequest += "serial";
+    qsExecRequest += " = '";
+    qsExecRequest += qsSerial;
+    qsExecRequest += "' AND ";
+    qsExecRequest += "name";
+    qsExecRequest += " = '";
+    qsExecRequest += qsBook;
+    qsExecRequest += "';";
+
+    qDebug() << "CheckDataInclusion: request = " << qsExecRequest;
+
+    qsMessage = qsName;
+    if(qslRequests.contains(qsExecRequest))
+    {
+        qsMessage += " > contains this request";
+    }
+    else
+    {
+        qslRequests.append(qsExecRequest);
+        qsMessage += " > append this request";
+        cbHistory->addItem(qsExecRequest);
+    }
+    qDebug() << qsMessage;
+    showMessage(qsMessage);
+
+    QSqlQueryModel * model = new QSqlQueryModel();
+
+    bool x;
+
+    model->setQuery(qsExecRequest);
+    if (model->lastError().isValid())
+    {
+        qCritical() << model->lastError().text();
+        x = false;
+    }
+    else
+    {
+        x = true;
+        TableView->setModel(model);
+        TableView->show();
+    }
+    qsMessage = qsName;
+    qsMessage += " > Select data from the table ";
+    qsMessage += qsTableName;
+    qsMessage += ": Data select";
+    if (x)
+    {
+        qsMessage += " success, rows count=";
+        qsMessage += QString::number(model->rowCount());
+    }
+    else
+    {
+        qsMessage +=  " error:";
+        qsMessage += model->lastError().text();
+    }
+
+    qDebug() << qsMessage;
+    showMessage(qsMessage);
+
+    return x;
+
+}//End of void cSqliteDriver::checkDataIncludion()

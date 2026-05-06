@@ -151,6 +151,11 @@ MainWindow::MainWindow(QWidget *parent) :
         if(!SqliteDriver->getAuthorList()) close();
     });
 
+    connect(ui->actionCheckRecordInclusion, &QAction::triggered, [this](bool x){
+        qDebug() << "MainMenu 'checkRecordInclusion' click: " << x;
+        if(!SqliteDriver->checkDataIncludion()) close();
+    });
+
     //--- Открытие базы данных
     if(!execActionOpenDatabase()) this->close();
 

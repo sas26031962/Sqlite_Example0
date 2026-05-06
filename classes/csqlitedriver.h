@@ -47,6 +47,11 @@ class cSqliteDriver : public QObject
     QString qsDatabaseName = "/data/audiobooks.db";//Имя базы данных
     QString qsTableName = "books";//Имя таблицы базы данных
 
+    QString qsAuthor = "";
+    QString qsSerial = "";
+    QString qsBook = "";
+    int iIncludionCount = 0;
+
 public:
     static QString qsApplicationPath;
 
@@ -73,6 +78,7 @@ public:
     bool storeRequestHistory();
     bool storeAuthorsList();
     bool getAuthorList();
+    bool checkDataIncludion();
 
 signals:
 
