@@ -30,15 +30,24 @@ cExternalData::cExternalData(QGroupBox *group_box_parent, QObject *parent) : QOb
     pbNext->setMaximumWidth(ButtonWidth);
     pbNext->setCursor(Qt::PointingHandCursor);
 
+    pbStore = new QPushButton(gbParent);
+    pbStore->setText("S");
+    pbStore->setMinimumHeight(Height);
+    pbStore->setMaximumHeight(Height);
+    pbStore->setMinimumWidth(ButtonWidth);
+    pbStore->setMaximumWidth(ButtonWidth);
+    pbStore->setCursor(Qt::PointingHandCursor);
+
     layout->addWidget(pbPrevious);
     layout->addWidget(pbNext);
     layout->addWidget(leCurrentString);
+    layout->addWidget(pbStore);
 
     int Margin = 3;
     layout->setContentsMargins(Margin, Margin, Margin, Margin);
 
-    QString qsFullPaht = cSqliteDriver::qsApplicationPath + DataFileName;
-    qslData = cLoadFiles::loadStringListFromFile(qsFullPaht);
+    qsFullPath = cSqliteDriver::qsApplicationPath + DataFileName;
+    qslData = cLoadFiles::loadStringListFromFile(qsFullPath);
     int DataLinesCount = qslData.count();
     qDebug() << "Load from file: " << DataLinesCount << " lines";
     if(DataLinesCount > 0)
@@ -62,6 +71,23 @@ cExternalData::cExternalData(QGroupBox *group_box_parent, QObject *parent) : QOb
               leCurrentString->setText(qslData.at(DataIndex));
               emit setDataString(qslData.at(DataIndex));
               emit setStatus("Next click:" + QString::number(DataIndex));
+        });
+
+        connect(pbStore, static_cast<void(QPushButton::*)()>(&QPushButton::pressed),this, [this](){
+            qDebug() << "PushButton 'Store' click, line=" << DataIndex;
+            qslData[DataIndex] = leCurrentString->text();
+            bool x = cLoadFiles::saveStringListToFile(qsFullPath, qslData);
+            QString qsMessage = "ExternalData > ";
+            if(x)
+            {
+                qsMessage += "Store line:" + QString::number(DataIndex);
+            }
+            else
+            {
+                qsMessage += "Can't store line:";
+            }
+            emit setStatus(qsMessage);
+
         });
     }
     else

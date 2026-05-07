@@ -25,8 +25,11 @@ class cExternalData : public QObject
     QLineEdit * leCurrentString;
     QPushButton * pbPrevious;
     QPushButton * pbNext;
+    QPushButton * pbStore;
     QStringList qslData;
     int DataIndex = 0;
+
+    QString qsFullPath;
     QString DataFileName = "/data/ExternalText.txt";
 
 public:

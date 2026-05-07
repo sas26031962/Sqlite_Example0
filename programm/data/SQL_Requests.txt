@@ -186,3 +186,8 @@ SELECT author, serial, name from books WHERE author = 'Р‘СѓС€РєРѕРІ РђР»РµРєСЃР°
 SELECT author, serial, name from books WHERE author = 'Бушков Александр' AND serial = '' AND name = 'Оборотни в эполетах, или Сиятельное ворье';
 SELECT author, serial, name from books WHERE author = 'Александр Бушков' AND serial = '' AND name = 'Охота на пиранью';
 SELECT author, serial, name from books WHERE author = 'Бушков Александр' AND serial = '' AND name = 'Пусть меня научат! Или как преподавали на Руси';
+SELECT author, serial, name from books WHERE author = 'Бушков Александр' AND serial = '' AND name = 'Охота на пиранью';
+SELECT author, serial, name from books WHERE author = 'Бушков Александр' AND serial = '' AND name = 'Загадочный Петербург, или Призраки европейских столиц';
+SELECT author, serial, name from books WHERE author = 'Бушков Александр' AND serial = '' AND name = 'Врач, гусар, мушкетер, или Летопись медицинской жизни России';
+SELECT author, serial, name from books WHERE author = 'Бушков Александр' AND serial = '' AND name = 'Сибирь и сибиряки, или Русские конкистадоры';
+SELECT author, serial, name from books WHERE author = 'Бушков Александр' AND serial = '' AND name = 'Врач, гусар, мушкетёр, или Летопись медицинской жизни России';
